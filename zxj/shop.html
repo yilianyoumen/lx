@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en" ng-app = "myapp">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="format-detection" content="address=no"/>
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+	<link type="text/css" rel="stylesheet" href="css/iconfont.css" />
+	<link type="text/css" rel="stylesheet" href="css/swiper.min.css"/>
+    <link type="text/css" rel="stylesheet" href="css/reset.css">
+    <link type="text/css" rel="stylesheet" href="css/common.css">
+    <link type="text/css" rel="stylesheet" href="css/shop.css" />
+</head>
+<body ng-controller = "count">
+	<header>
+		<i class = "icon iconfont icon-arrowleft"></i>
+		订单支付
+		<i class = "icon iconfont icon-xinxi"></i>
+	</header>
+	<nav>
+		<p><span>路飞</span>  <span>138****8888</span></p>
+		<p><i class = "icon iconfont icon-zuobiao"></i>北京市海淀区知春路北京市海淀区知春路北京市海淀区知春路<i class = "icon iconfont icon-arrowright"></i></p>
+		
+	</nav>
+	<p class = "bg"></p>
+	<p class = "empty"></p>
+	<section>
+		<p class="title">
+			<i class= "icon iconfont icon-dianpu"></i>
+			恒之然旗舰店
+		</p>
+		<div class="shop">
+			<dl>
+				<dt><img src="images/img/shop2.png" alt=""></dt>
+				<dd>
+					<p>维维嚼益水果大豆棒橙味维维嚼益水果大豆棒橙味...</p>
+					<p>￥{{price}}.00</p>
+					<p>￥1000.00</p>
+					<p><span ng-click = "del()" class = "del">-</span><span class = "num">{{num}}</span><span ng-click = "add()" class = "add">+</span></p>
+				</dd>
+			</dl>
+		</div>
+		<div class="detail">
+			<p><span class="left">商品总金额：</span><span class="right">￥{{price}}.00</span></p>
+			<p><span class="left">运费：</span><span class="right">￥{{fare}}.00</span></p>
+			<p><span class="left">总额(含运费)：</span><span class="right color">￥{{total}}.00</span></p>
+		</div>
+		<ul id = "uls">
+			<li><span class = "left">余额支付￥100.00</span><span class = "right">
+				<input type="checkbox" id = "ck1">
+				<label for="ck1" ng-click = "del2()" ng-class = "flag1">
+					<span class="round"></span>
+				</label>
+			</span>
+			</li>
+			<li><span class = "left">奖金支付￥100.00</span><span class = "right">
+				<input type="checkbox" id = "ck2">
+				<label for="ck2" ng-click = "del3()" ng-class = "flag2">
+					<span class="round"></span>
+				</label>
+			</span>
+			</li>
+			<li><span class = "left">其他支付方式</span><span class = "right">
+				<i class = "fa fa-angle-right"></i>
+			</span></li>
+		</ul>
+		<p class = "mark">余额不足，请选择其他支付方式!</p>
+	</section>
+	<p class="empty"></p>
+	<footer>
+		<ul>
+			<li>
+				<p>总计：<span>￥{{total2}}.00</span></p>
+				<p>(含运费)</p>
+			</li>
+			<li>
+				提交订单
+			</li>
+		</ul>
+	</footer>
+	<script src = "js/angular.js"></script>
+	<script>
+		var myapp = angular.module("myapp",[])
+		myapp.controller("count",function($scope){
+			$scope.num = 1
+			$scope.price = 988
+			$scope.fare = 10
+			$scope.total = 998
+			$scope.total2 = $scope.total
+			$scope.flag2 = false 
+			$scope.flag1 = false
+			$scope.del = function(){
+				if($scope.num>1){
+					$scope.num--
+					$scope.total = $scope.num*$scope.price+$scope.fare
+					$scope.total2 = $scope.num*$scope.price+$scope.fare
+				}
+			}
+			$scope.add = function(){
+				$scope.num++
+				$scope.total = $scope.num*$scope.price+$scope.fare
+				$scope.total2 = $scope.num*$scope.price+$scope.fare
+			}
+			$scope.del2 = function(){
+				if(!$scope.flag1){
+					$scope.total2 = $scope.total2-100
+					$scope.flag1 = true
+				}else if($scope.flag1){
+					$scope.total2 = $scope.total2+100
+					$scope.flag1 = false
+				}
+				
+			}
+			
+			$scope.del3 = function(){
+				if(!$scope.flag2){
+					$scope.total2 = $scope.total2-100
+					$scope.flag2 = true
+				}else if($scope.flag2){
+					$scope.total2 = $scope.total2+100
+					$scope.flag2 = false
+				}
+				
+			}
+		})
+	</script>
+</body>
+</html>
